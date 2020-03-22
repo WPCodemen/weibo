@@ -19,3 +19,9 @@ Route::get('/help', 'StaticPagesController@help');
 
 //关于我们
 Route::get('/about', 'StaticPagesController@about');
+
+//登录的路由
+Route::get('signup', 'UsersController@create')->name('signup');
+
+//用户控制器的Restful 风格路由
+Route::resource('users', 'UsersController');
