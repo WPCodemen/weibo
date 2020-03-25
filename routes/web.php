@@ -50,3 +50,13 @@ Route::resource('users', 'UsersController');
 
 // //用户删除
 // Route::delete('/users/{user}', 'UsersController@destroy')->name('users.destroy');
+
+//会话的路由
+Route::get('login', 'SessionsController@create')->name('login');
+
+Route::post('login', 'SessionsController@store')->name('login');
+
+Route::delete('logout', 'SessionsController@destroy')->name('logout');
+
+
+
