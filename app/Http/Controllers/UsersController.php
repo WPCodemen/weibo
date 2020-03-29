@@ -44,4 +44,32 @@ class UsersController extends Controller
         return redirect()->route('users.show', [$user]);
     }
 
+    //编辑用户信息
+    public function edit(User $user)
+    {
+        return view('users.edit', compact('user'));
+    }
+
+    //用户信息的更新操作
+    public function update(User $user, Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|max:50',
+            'password' => 'nullable|confirmed|min:6'
+        ]);
+
+        //实例化一个数组
+        $data = [];
+        $data['name'] = $request->name;
+        if ($request->password) {
+            $data['password'] = bcrypt($request->password);
+        }
+
+        $user->update($data);
+
+        session()->flash('success', '个人资料更细成功！');
+
+        return redirect()->route('users.show', $user->id);   
+    }
+
 }
